@@ -1,4 +1,4 @@
-# encoding: uft-8
+# encoding: utf-8
 # vim: syntax=ruby
 require 'rubygems'
 require 'rake'
