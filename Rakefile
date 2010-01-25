@@ -14,6 +14,8 @@ begin
     gem.homepage    = 'http://github.com/shanna/dm-money'
     gem.authors     = ['Shane Hanna']
     gem.executables = [] # Only ever bundled development executables in bin/*
+    gem.add_dependency 'big_money', '~> 1.1.0'
+    gem.add_dependency 'dm-core', '>= 0.10'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
