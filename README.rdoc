@@ -1,0 +1,61 @@
+= dm-money
+
+== Description
+
+BigMoney backed DataMapper money properties.
+
+== Todo
+
+* Validations.
+
+== Synopsis
+
+=== Basic
+
+  require 'dm-core'
+  require 'dm-money'
+
+  class Cake
+    include DataMapper::Resource
+    # ... other properties.
+
+    money :gst
+    # public
+    #   gst #=> BigMoney
+    #   gst=(value)
+    #
+    # property :gst_amount,   BigDecimal, accessor: private
+    # property :gst_currency, String,     accessor: private, length: 3
+  end
+
+=== Property Options
+
+  require 'dm-core'
+  require 'dm-money'
+
+  class Cake
+    include DataMapper::Resource
+    # ... other properties.
+
+    money :price, required: true, accessor: protected
+    # protected
+    #   price #=> BigMoney
+    #   price=(value)
+    #
+    # property :price_amount,   BigDecimal, accessor: private, required: true
+    # property :price_currency, String,     accessor: private, required: true, length: 3
+  end
+
+== Install
+
+* Via git:
+
+    git clone git://github.com/shanna/dm-money.git
+
+* Via gem:
+
+    gem install dm-money
+
+== License
+
+See LICENSE.
