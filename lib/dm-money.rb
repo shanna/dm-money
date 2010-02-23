@@ -41,14 +41,25 @@ module DataMapper
       def money(name, options = {})
         raise ArgumentError.new('You need to pass at least one argument') if name.empty?
 
+        if default = options.delete(:default)
+          raise TypeError.new("Expected BigMoney +default+ but got #{options[:default].class}") \
+            unless default.is_a?(BigMoney)
+        end
+
+        # TODO: Golf.
         property               = Property.new(self, name, BigDecimal, options)
         name                   = property.name.to_s
         instance_variable_name = property.instance_variable_name
         name_amount            = "#{name}_amount"
         name_currency          = "#{name}_currency"
 
-        self.property name_amount.to_sym,   BigDecimal, property.options.except(:accessor, :reader, :writer).merge(:accessor => :private)
-        self.property name_currency.to_sym, String,     :accessor => :private, :required => property.required, :length => 3
+        options_amount = options.only(:required, :length, :offset).merge(:accessor => :private)
+        options_amount.merge!(:default => default.amount) if default
+        self.property name_amount.to_sym, BigDecimal, options_amount
+
+        options_currency = options.only(:required).merge(:accessor => :private, :length => 3)
+        options_currency.merge!(:default => default.currency) if default
+        self.property name_currency.to_sym, String, options_currency
 
         # TODO: Access amount, currency via readers or properties?
         # TODO: Validations or error message attempting to set with something other than BigMoney?

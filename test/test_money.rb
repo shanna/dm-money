@@ -8,7 +8,7 @@ class TestMoney < Test::Unit::TestCase
         include DataMapper::Resource
         property :id,   Serial
         property :type, String
-        money    :price
+        money    :price, :default => BigMoney.new(0, :aud)
       end # Cake
     end
 
@@ -26,6 +26,12 @@ class TestMoney < Test::Unit::TestCase
         cake = Cake.create(:type => 'sponge', :price => price)
         assert_equal price, cake.price
       end
+    end
+
+    should 'have BigMoney default' do
+      price = BigMoney.new(0, :aud)
+      cake  = Cake.create(:type => 'banana')
+      assert_equal price, cake.price
     end
   end
 end # TestMoney
