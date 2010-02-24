@@ -1,4 +1,5 @@
 # vim: syntax=ruby
+# Bundler 0.8.1 Gemfile. I will remove bundler when I get the chance.
 bundle_path 'gems'
 disable_rubygems
 disable_system_gems
