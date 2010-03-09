@@ -73,7 +73,7 @@ module DataMapper
 
           #{property.writer_visibility}
           def #{name}=(value)
-            raise TypeError.new('Expected BigMoney +value+ but got \#{value.class}') unless value.kind_of?(BigMoney)
+            raise TypeError.new("Expected BigMoney +value+ but got \#{value.class}") unless value.kind_of?(BigMoney)
             self.#{name_amount}       = value.amount
             self.#{name_currency}     = value.currency
             #{instance_variable_name} = value
