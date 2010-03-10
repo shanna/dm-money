@@ -7,6 +7,8 @@ BigMoney backed DataMapper money properties.
 == Todo
 
 * Validations.
+* Precision and scale options should also be applied to underlying BigMoney/BigDecimal amount.
+* A rounding mode option, see BigDecimal#mode.
 
 == Synopsis
 
@@ -46,11 +48,23 @@ BigMoney backed DataMapper money properties.
     # property :price_currency, String,     accessor: private, required: true, length: 3
   end
 
+== Precision and Scale
+
+"The SQL standard requires a default scale of 0, i.e. coercion to integer precision. We find this a bit useless. If
+you're concerned about portability, always specify the precision and scale explicitly." -- PostgreSQL Documentation.
+
+DataMapper's bread and butter is SQL and old school relational databases so unsurprisingly a default numeric/decimal
+scale of 0 is used (where the default precision comes from I do not know).
+
+If you require any fractional money amounts remember to explicitly set the precision and scale options for each money
+property.
+
 == Install
 
 * Via git:
 
     git clone git://github.com/shanna/dm-money.git
+    cd dm-money && rake install
 
 * Via gem:
 
