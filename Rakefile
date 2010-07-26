@@ -15,7 +15,7 @@ begin
     gem.authors     = ['Shane Hanna']
     gem.executables = [] # Only ever bundled development executables in bin/*
     gem.add_dependency 'big_money', '~> 1.1'
-    gem.add_dependency 'dm-core', '>= 0.10'
+    gem.add_dependency 'dm-core', '~> 1.0'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
