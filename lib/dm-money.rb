@@ -47,7 +47,7 @@ module DataMapper
         end
 
         # TODO: Golf.
-        property               = Property.new(self, name, BigDecimal, options)
+        property               = DataMapper::Property::Decimal.new(self, name, options)
         name                   = property.name.to_s
         instance_variable_name = property.instance_variable_name
         name_amount            = "#{name}_amount"
@@ -55,11 +55,11 @@ module DataMapper
 
         options_amount = options.only(:required, :precision, :scale).merge(:accessor => :private)
         options_amount.merge!(:default => default.amount) if default
-        self.property name_amount.to_sym, BigDecimal, options_amount
+        self.property name_amount.to_sym, DataMapper::Property::Decimal, options_amount
 
         options_currency = options.only(:required).merge(:accessor => :private, :length => 3)
         options_currency.merge!(:default => default.currency.to_s) if default
-        self.property name_currency.to_sym, String, options_currency
+        self.property name_currency.to_sym, DataMapper::Property::String, options_currency
 
         # TODO: Access amount, currency via readers or properties?
         # TODO: Validations or error message attempting to set with something other than BigMoney?

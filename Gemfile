@@ -5,7 +5,7 @@ disable_rubygems
 disable_system_gems
 
 gem 'big_money', '~> 1.1'
-gem 'dm-core',   '>= 0.10'
+gem 'dm-core',   '~> 1.0'
 
 only :development do
   gem 'jeweler'
